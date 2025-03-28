@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend
+  namespace: beatwave
+spec:
+  selector:
+    app: frontend
+  ports:
+  - port: 3000
+    targetPort: 3000
