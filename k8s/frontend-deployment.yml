@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beatwave-frontend-deployment
+  namespace: beatwave
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      name: beatwave-frontend
+      namespace: beatwave
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: beatwave-frontend
+        image: kunal245/beatwave-frontend:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: VITE_CLERK_PUBLISHABLE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: clerk
+              key: VITE_CLERK_PUBLISHABLE_KEY
