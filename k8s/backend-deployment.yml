@@ -1,0 +1,78 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: beatwave-backend-deployment
+  namespace: beatwave
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      name: beatwave-backend-pod
+      namespace: beatwave
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: beatwave-backend
+        image: kunal245/beatwave-backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-port
+              key: PORT
+        
+        - name: ADMIN_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-port
+              key: ADMIN_EMAIL
+
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: backend-port
+              key: NODE_ENV
+
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: MONGODB_URI
+
+        - name: CLERK_PUBLISHABLE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: VITE_CLERK_PUBLISHABLE_KEY
+
+        - name: CLERK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: CLERK_SECRET_KEY
+
+        - name: CLOUDINARY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: CLOUDINARY_API_KEY
+
+        - name: CLOUDINARY_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: CLOUDINARY_API_SECRET
+
+        - name: CLOUDINARY_CLOUD_NAME
+          valueFrom:
+            secretKeyRef:
+              name: backend-secrets
+              key: CLOUDINARY_CLOUD_NAME

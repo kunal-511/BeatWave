@@ -10,7 +10,7 @@ spec:
       app: frontend
   template:
     metadata:
-      name: beatwave-frontend
+      name: beatwave-frontend-pod
       namespace: beatwave
       labels:
         app: frontend
