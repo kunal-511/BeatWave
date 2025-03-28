@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: backend-port
+  namespace: beatwave
+data:
+  PORT: "5000"
+  ADMIN_EMAIL: "yoyokvunal@gmail.com"
+  NODE_ENV: "development"
