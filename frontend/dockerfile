@@ -1,24 +1,25 @@
 # Use an official Node runtime as the base image
-FROM node:20-alpine AS build
+FROM node:20-alpine
+
 # Set working directory in the container
 WORKDIR /app
+
 # Copy package.json and package-lock.json (or yarn.lock)
 COPY package*.json ./
 COPY yarn.lock* ./
+
 # Install dependencies
 RUN yarn install --frozen-lockfile
+
 # Copy the rest of the application code
 COPY . .
-# Build the application with the Clerk publishable key as a build-time argument
+
+# Set the Clerk publishable key
 ARG VITE_CLERK_PUBLISHABLE_KEY
 ENV VITE_CLERK_PUBLISHABLE_KEY=$VITE_CLERK_PUBLISHABLE_KEY
-RUN yarn build
-# Production stage
-FROM nginx:alpine
-# Copy the build output to replace the default nginx contents
-COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose port 80
-EXPOSE 80
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Expose port 5173 for Vite dev server
+EXPOSE 3000
+
+# Start Vite dev server with host set to listen on all interfaces
+CMD ["yarn", "dev", "--host", "0.0.0.0", "--port", "3000"]
