@@ -1,0 +1,34 @@
+# templates/frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beatwave-frontend-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.frontend.name }}
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.frontend.name }}
+  template:
+    metadata:
+      name: beatwave-frontend-pod
+      namespace: {{ .Values.namespace }}
+      labels:
+        app: {{ .Values.frontend.name }}
+    spec:
+      containers:
+        - name: beatwave-frontend
+          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.frontend.port }}
+          env:
+            - name: VITE_CLERK_PUBLISHABLE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: VITE_CLERK_PUBLISHABLE_KEY
+          resources:
+{{ toYaml .Values.frontend.resources | indent 12 }}

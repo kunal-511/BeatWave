@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beatwave-backend-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.backend.name }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.name }}
+  template:
+    metadata:
+      name: beatwave-backend-pod
+      namespace: {{ .Values.namespace }}
+      labels:
+        app: {{ .Values.backend.name }}
+    spec:
+      containers:
+        - name: beatwave-backend
+          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.backend.port }}
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-port
+                  key: PORT
+            - name: ADMIN_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-port
+                  key: ADMIN_EMAIL
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-port
+                  key: NODE_ENV
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: MONGODB_URI
+            - name: CLERK_PUBLISHABLE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: VITE_CLERK_PUBLISHABLE_KEY
+            - name: CLERK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: CLERK_SECRET_KEY
+            - name: CLOUDINARY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: CLOUDINARY_API_KEY
+            - name: CLOUDINARY_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: CLOUDINARY_API_SECRET
+            - name: CLOUDINARY_CLOUD_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: CLOUDINARY_CLOUD_NAME
+          resources:
+{{ toYaml .Values.backend.resources | indent 12 }}

@@ -1,0 +1,10 @@
+# templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-port
+  namespace: {{ .Values.namespace }}
+data:
+  PORT: {{ .Values.configMap.PORT | quote }}
+  ADMIN_EMAIL: {{ .Values.configMap.ADMIN_EMAIL | quote }}
+  NODE_ENV: {{ .Values.configMap.NODE_ENV | quote }}

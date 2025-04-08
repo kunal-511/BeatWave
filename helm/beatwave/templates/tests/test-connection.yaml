@@ -1,15 +1,29 @@
+{{- if .Values.testConnection.enabled }}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "beatwave.fullname" . }}-test-connection"
+  name: "{{ .Release.Name }}-test-connection"
+  namespace: {{ .Values.namespace }}
   labels:
-    {{- include "beatwave.labels" . | nindent 4 }}
+    app.kubernetes.io/name: beatwave-test
+    app.kubernetes.io/instance: {{ .Release.Name }}
   annotations:
     "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   containers:
-    - name: wget
-      image: busybox
-      command: ['wget']
-      args: ['{{ include "beatwave.fullname" . }}:{{ .Values.service.port }}']
+    - name: test
+      image: "{{ .Values.testConnection.image.repository }}:{{ .Values.testConnection.image.tag }}"
+      imagePullPolicy: {{ .Values.testConnection.image.pullPolicy }}
+      command: {{ .Values.testConnection.command }}
+      args: {{ .Values.testConnection.args | toYaml | nindent 8 }}
+      env:
+        - name: TARGET_SERVICE
+          value: {{ if eq .Values.testConnection.target "backend" }}{{ .Values.backend.name }}{{ else }}{{ .Values.frontend.name }}{{ end }}
+        - name: TARGET_PORT
+          value: {{ if eq .Values.testConnection.target "backend" }}{{ .Values.backend.service.port | quote }}{{ else }}{{ .Values.frontend.service.port | quote }}{{ end }}
+      resources:
+{{ toYaml .Values.testConnection.resources | indent 8 }}
   restartPolicy: Never
+  terminationGracePeriodSeconds: {{ .Values.testConnection.timeoutSeconds }}
+{{- end }}
