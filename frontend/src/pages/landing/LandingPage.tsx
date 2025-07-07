@@ -209,7 +209,7 @@ const LandingPage = () => {
     { number: "99.9%", label: "Uptime", icon: <Zap className="h-6 w-6" /> }
   ];
 
-  const [currentFeature, setCurrentFeature] = useState(0);
+  const [, setCurrentFeature] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
