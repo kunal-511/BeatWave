@@ -24,7 +24,7 @@ const LeftSidebar = () => {
 			<div className='rounded-lg bg-zinc-900 p-4'>
 				<div className='space-y-2'>
 					<Link
-						to={"/"}
+						to={"/home"}
 						className={cn(
 							buttonVariants({
 								variant: "ghost",

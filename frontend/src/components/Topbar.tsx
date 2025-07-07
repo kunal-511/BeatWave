@@ -20,7 +20,7 @@ const Topbar = () => {
     >
       <div
         className="flex gap-2 items-center cursor-pointer"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/home")}
       >
         <img
           src="https://alternative.me/media/256/beatwave-icon-8x42bk54wwlw7535-c.png"

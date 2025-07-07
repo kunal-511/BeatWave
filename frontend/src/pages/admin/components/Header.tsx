@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3 mb-8">
-        <Link to="/" className="rounded-lg flex items-center gap-2 ">
+        <Link to="/home" className="rounded-lg flex items-center gap-2 ">
           <img
             src="https://alternative.me/media/256/beatwave-icon-8x42bk54wwlw7535-c.png"
             className="size-10 text-black"
