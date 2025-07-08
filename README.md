@@ -1,4 +1,4 @@
-````md
+
 # 🎵 BeatWave
 
 **Full-Stack Music Streaming Application**
@@ -69,7 +69,8 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **Nodemon** for automatic server restarts during development  
 - **Docker** for containerization and deployment  
 
----
+
+````
 
 ## ⚙️ Getting Started
 
@@ -84,8 +85,8 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 1. **Clone the repository**
    ```bash
    git clone https://github.com/kunal-2004/beatwave.git
-   cd beatwave
-````
+   cd beatwave ```
+
 
 2. **Install dependencies**
 
