@@ -1,5 +1,3 @@
-Here is the cleaned and properly formatted version of your content in **Markdown (MD)** format, with invalid symbols replaced or removed for clarity and correctness:
-
 ````md
 # 🎵 BeatWave
 
