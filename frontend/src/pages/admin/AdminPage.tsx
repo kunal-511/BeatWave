@@ -11,7 +11,7 @@ import { useMusicStore } from "@/stores/useMusicStore";
 const AdminPage = () => {
 	const { isAdmin, isLoading } = useAuthStore();
 
-	const { fetchAlbums, fetchSongs, fetchStats } = useMusicStore();
+	const { fetchAlbums, fetchSongs, fetchStats} = useMusicStore();
 
 	useEffect(() => {
 		fetchAlbums();

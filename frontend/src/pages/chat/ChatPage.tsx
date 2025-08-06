@@ -49,9 +49,8 @@ const ChatPage = () => {
                   {messages.map((message) => (
                     <div
                       key={message._id}
-                      className={`flex items-start gap-3 ${
-                        message.senderId === user?.id ? "flex-row-reverse" : ""
-                      }`}
+                      className={`flex items-start gap-3 ${message.senderId === user?.id ? "flex-row-reverse" : ""
+                        }`}
                     >
                       <Avatar className="size-8">
                         <AvatarImage
@@ -97,7 +96,9 @@ const NoConversationPlaceholder = () => (
       alt="beatwave"
       className="size-16 animate-bounce"
     />
-    BeatWave
+    <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+      BeatWave
+    </span>
     <div className="text-center">
       <h3 className="text-zinc-300 text-lg font-medium mb-1">
         No conversation selected

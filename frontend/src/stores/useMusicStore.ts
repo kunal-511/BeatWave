@@ -14,6 +14,8 @@ interface MusicStore {
 	trendingSongs: Song[];
 	stats: Stats;
 	allSongs: Song[];
+	searchResults: Song[];
+	isSearching: boolean;
 
 	fetchAlbums: () => Promise<void>;
 	fetchAlbumById: (id: string) => Promise<void>;
@@ -25,6 +27,8 @@ interface MusicStore {
 	deleteSong: (id: string) => Promise<void>;
 	deleteAlbum: (id: string) => Promise<void>;
 	fetchAllSongs: () => Promise<void>;
+	searchSongs: (query: string) => Promise<void>;
+	clearSearch: () => void;
 }
 
 export const useMusicStore = create<MusicStore>((set) => ({
@@ -43,6 +47,8 @@ export const useMusicStore = create<MusicStore>((set) => ({
 		totalArtists: 0,
 	},
 	allSongs: [],
+	searchResults: [],
+	isSearching: false,
 
 	deleteSong: async (id) => {
 		set({ isLoading: true, error: null });
@@ -52,6 +58,10 @@ export const useMusicStore = create<MusicStore>((set) => ({
 			set((state) => ({
 				songs: state.songs.filter((song) => song._id !== id),
 			}));
+			
+			const response = await axiosInstance.get("/stats");
+			set({ stats: response.data });
+			
 			toast.success("Song deleted successfully");
 		} catch (error: any) {
 			console.log("Error in deleteSong", error);
@@ -71,6 +81,10 @@ export const useMusicStore = create<MusicStore>((set) => ({
 					song.albumId === state.albums.find((a) => a._id === id)?.title ? { ...song, album: null } : song
 				),
 			}));
+			
+			const response = await axiosInstance.get("/stats");
+			set({ stats: response.data });
+			
 			toast.success("Album deleted successfully");
 		} catch (error: any) {
 			toast.error("Failed to delete album: " + error.message);
@@ -174,5 +188,28 @@ export const useMusicStore = create<MusicStore>((set) => ({
 		} finally {
 			set({ isLoading: false });
 		}
+	},
+
+	searchSongs: async (query: string) => {
+		if (!query.trim()) {
+			set({ searchResults: [], isSearching: false });
+			return;
+		}
+
+		set({ isSearching: true, error: null });
+		try {
+			const response = await axiosInstance.get(`/songs/search?q=${encodeURIComponent(query)}`);
+			set({ searchResults: response.data, isSearching: false });
+		} catch (error: any) {
+			set({ 
+				error: error.response?.data?.message || "Failed to search songs",
+				searchResults: [],
+				isSearching: false 
+			});
+		}
+	},
+
+	clearSearch: () => {
+		set({ searchResults: [], isSearching: false });
 	},
 }));

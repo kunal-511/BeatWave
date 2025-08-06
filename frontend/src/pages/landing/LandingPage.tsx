@@ -383,7 +383,7 @@ const LandingPage = () => {
                 </Button>
               </motion.div>
               
-              <motion.div
+              {/* <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -395,7 +395,7 @@ const LandingPage = () => {
                   <Volume2 className="mr-3 h-6 w-6" />
                   Watch Demo
                 </Button>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
           </motion.div>
         </div>
@@ -534,7 +534,7 @@ const LandingPage = () => {
                   Get Started Free
                 </FloatingButton>
                 
-                <motion.div
+                {/* <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -546,7 +546,7 @@ const LandingPage = () => {
                     <Share2 className="mr-3 h-6 w-6" />
                     Share with Friends
                   </Button>
-                </motion.div>
+                </motion.div> */}
               </div>
             </motion.div>
           </motion.div>
