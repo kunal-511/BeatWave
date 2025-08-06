@@ -11,9 +11,7 @@ import {
   Radio,
   Sparkles,
   ArrowRight,
-  Volume2,
   Heart,
-  Share2,
   Zap,
   Star,
   Disc,
@@ -382,20 +380,6 @@ const LandingPage = () => {
                   </motion.div>
                 </Button>
               </motion.div>
-              
-              {/* <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-zinc-600/50 bg-zinc-800/30 text-zinc-300 hover:bg-zinc-700/50 px-12 py-6 text-xl rounded-full backdrop-blur-sm"
-                >
-                  <Volume2 className="mr-3 h-6 w-6" />
-                  Watch Demo
-                </Button>
-              </motion.div> */}
             </motion.div>
           </motion.div>
         </div>
@@ -533,20 +517,7 @@ const LandingPage = () => {
                   <Play className="mr-3 h-6 w-6" />
                   Get Started Free
                 </FloatingButton>
-                
-                {/* <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-zinc-600/50 bg-zinc-800/30 text-zinc-300 hover:bg-zinc-700/50 px-12 py-6 text-xl rounded-full backdrop-blur-sm"
-                  >
-                    <Share2 className="mr-3 h-6 w-6" />
-                    Share with Friends
-                  </Button>
-                </motion.div> */}
+       
               </div>
             </motion.div>
           </motion.div>
