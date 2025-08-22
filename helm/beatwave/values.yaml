@@ -5,8 +5,8 @@ backend:
   name: backend
   replicaCount: 1
   image:
-    repository: kunal245/beatwave-backend
-    tag: latest
+    repository: ghcr.io/kunal-511/beatwave-backend
+    tag: v2
     pullPolicy: IfNotPresent
   port: 5000
   service:
@@ -24,8 +24,8 @@ frontend:
   name: frontend
   replicaCount: 1
   image:
-    repository: kunal245/beatwave-frontend
-    tag: latest
+    repository: ghcr.io/kunal-511/beatwave
+    tag: v2
     pullPolicy: IfNotPresent
   port: 3000
   service:

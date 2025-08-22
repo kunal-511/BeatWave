@@ -2,10 +2,13 @@ import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import { MoveLeftIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const handleBack = () => {
-    window.history.back();
+    navigate("/home");
+
   };
   return (
     <div className="flex items-center justify-between">

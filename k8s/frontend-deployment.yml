@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: beatwave-frontend
-        image: kunal245/beatwave-frontend:latest
+        image: ghcr.io/kunal-511/beatwave:v2
         ports:
         - containerPort: 3000
         env:

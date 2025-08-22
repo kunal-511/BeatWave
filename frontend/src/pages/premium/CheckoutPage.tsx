@@ -4,7 +4,7 @@ import { axiosInstance } from "@/lib/axios";
 import toast from "react-hot-toast";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { Loader } from "lucide-react";
+import { Loader, MoveLeftIcon } from "lucide-react";
 
 declare global {
   interface Window {
@@ -14,10 +14,10 @@ declare global {
 
 const CheckoutPage = () => {
   const { isSignedIn, isLoaded, getToken } = useAuth();
-  const {user} = useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const premiumPrice = 200; 
+  const premiumPrice = 200;
 
 
   if (isLoaded && !isSignedIn) {
@@ -60,7 +60,7 @@ const CheckoutPage = () => {
     try {
 
       const token = await getToken();
-      
+
       if (!token) {
         toast.error('Authentication failed. Please sign in again.');
         setIsLoading(false);
@@ -117,10 +117,14 @@ const CheckoutPage = () => {
       setIsLoading(false);
     }
   };
+   const handleBack = () => {
+    navigate("/home");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-zinc-900 to-black">
       <div className="container mx-auto px-4 py-8">
+        <Button className="text-white text-xl p-4" onClick={handleBack} ><MoveLeftIcon /></Button>
         <div className="max-w-md mx-auto">
           <div className="bg-zinc-800/50 backdrop-blur-md rounded-2xl border border-zinc-700/50 p-8">
             <div className="text-center mb-8">
@@ -143,8 +147,8 @@ const CheckoutPage = () => {
                 </p>
               </div>
 
-              <Button 
-                type="button" 
+              <Button
+                type="button"
                 onClick={payNow}
                 disabled={isLoading}
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
