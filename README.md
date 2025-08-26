@@ -68,7 +68,6 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **TypeScript** for enhanced developer experience  
 - **Nodemon** for automatic server restarts during development  
 - **Docker** for containerization and deployment
-- **Kubernetes Manifests and HELM charts** for easy deployment on K8s clusters
 
 
 ````
