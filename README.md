@@ -2,8 +2,7 @@
 # 🎵 BeatWave
 
 **Full-Stack Music Streaming Application**
-
-> A modern, feature-rich music streaming platform built with TypeScript, React, Express, and real-time WebSocket communication. Connect, stream, and vibe with friends!
+ A modern, feature-rich music streaming platform built with TypeScript, React, Express, and real-time WebSocket communication. Connect, stream, and vibe with friends!
 
 ---
 
@@ -53,7 +52,8 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **Radix UI** for accessible, high-quality components  
 - **Zustand** for lightweight state management  
 - **React Router** for client-side routing  
-- **Socket.io Client** for real-time features  
+- **Socket.io Client** for real-time features
+- **Redis** for caching and to getTrendingSongs
 
 ### Backend Stack
 - **Node.js** with Express.js framework  
@@ -61,13 +61,15 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **Socket.io** for real-time WebSocket communication  
 - **Cloudinary** for media storage and optimization  
 - **Clerk** for user authentication and management  
-- **CORS** enabled for cross-origin requests  
+- **CORS** enabled for cross-origin requests
+- **Redis** for in memory storage
 
 ### Development Tools
 - **ESLint** for code linting and consistency  
 - **TypeScript** for enhanced developer experience  
 - **Nodemon** for automatic server restarts during development  
-- **Docker** for containerization and deployment  
+- **Docker** for containerization and deployment
+- **Kubernetes Manifests and HELM charts** for easy deployment on K8s clusters
 
 
 ````
