@@ -53,7 +53,6 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **Zustand** for lightweight state management  
 - **React Router** for client-side routing  
 - **Socket.io Client** for real-time features
-- **Redis** for caching and to getTrendingSongs
 
 ### Backend Stack
 - **Node.js** with Express.js framework  
