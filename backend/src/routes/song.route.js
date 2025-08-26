@@ -3,9 +3,9 @@ import {
   getAllSongs,
   getFeaturedSongs,
   getMadeForYouSongs,
-  getTrendingSongs,
   searchSongs,
 } from "../controller/song.controller.js";
+import { getTrendingSongs } from "../controller/analytics.controller.js";
 import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
 
 const router = Router();

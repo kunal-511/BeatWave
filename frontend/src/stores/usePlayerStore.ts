@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { Song } from "@/types";
 import { useChatStore } from "./useChatStore";
+import { useMusicStore } from "./useMusicStore";
 
 interface PlayerStore {
 	currentSong: Song | null;
@@ -42,6 +43,9 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 				activity: `Playing ${song.title} by ${song.artist}`,
 			});
 		}
+
+		useMusicStore.getState().trackSongPlay(song._id);
+
 		set({
 			queue: songs,
 			currentSong: song,
@@ -60,6 +64,8 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 				activity: `Playing ${song.title} by ${song.artist}`,
 			});
 		}
+
+		useMusicStore.getState().trackSongPlay(song._id);
 
 		const songIndex = get().queue.findIndex((s) => s._id === song._id);
 		set({
@@ -103,6 +109,8 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 				});
 			}
 
+			useMusicStore.getState().trackSongPlay(nextSong._id);
+
 			set({
 				currentSong: nextSong,
 				currentIndex: nextIndex,
@@ -136,6 +144,8 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 					activity: `Playing ${prevSong.title} by ${prevSong.artist}`,
 				});
 			}
+
+			useMusicStore.getState().trackSongPlay(prevSong._id);
 
 			set({
 				currentSong: prevSong,

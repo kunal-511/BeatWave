@@ -29,6 +29,7 @@ interface MusicStore {
 	fetchAllSongs: () => Promise<void>;
 	searchSongs: (query: string) => Promise<void>;
 	clearSearch: () => void;
+	trackSongPlay: (songId: string) => Promise<void>;
 }
 
 export const useMusicStore = create<MusicStore>((set) => ({
@@ -211,5 +212,13 @@ export const useMusicStore = create<MusicStore>((set) => ({
 
 	clearSearch: () => {
 		set({ searchResults: [], isSearching: false });
+	},
+
+	trackSongPlay: async (songId: string) => {
+		try {
+			await axiosInstance.post(`/analytics/track-play/${songId}`);
+		} catch (error: any) {
+			console.log("Error tracking song play:", error);
+		}
 	},
 }));
