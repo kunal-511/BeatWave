@@ -18,6 +18,7 @@ import {
   Waves,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import SplashCursor from "@/components/SplashCursor";
 
 const AnimatedBackground = () => {
   const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, delay: number}>>([]);
@@ -218,6 +219,16 @@ const LandingPage = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen text-white overflow-hidden relative">
+      <SplashCursor 
+        SIM_RESOLUTION={64}
+        DYE_RESOLUTION={512}
+        DENSITY_DISSIPATION={2}
+        VELOCITY_DISSIPATION={1.5}
+        PRESSURE_ITERATIONS={15}
+        CURL={2}
+        SPLAT_FORCE={4000}
+        COLOR_UPDATE_SPEED={5}
+      />
       <AnimatedBackground />
       
       <motion.nav 
