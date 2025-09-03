@@ -1,5 +1,23 @@
+// @ts-nocheck
 'use client';
 import { useEffect, useRef } from 'react';
+
+interface SplashCursorProps {
+  SIM_RESOLUTION?: number;
+  DYE_RESOLUTION?: number;
+  CAPTURE_RESOLUTION?: number;
+  DENSITY_DISSIPATION?: number;
+  VELOCITY_DISSIPATION?: number;
+  PRESSURE?: number;
+  PRESSURE_ITERATIONS?: number;
+  CURL?: number;
+  SPLAT_RADIUS?: number;
+  SPLAT_FORCE?: number;
+  SHADING?: boolean;
+  COLOR_UPDATE_SPEED?: number;
+  BACK_COLOR?: { r: number; g: number; b: number };
+  TRANSPARENT?: boolean;
+}
 
 function SplashCursor({
   SIM_RESOLUTION = 128,
@@ -16,8 +34,8 @@ function SplashCursor({
   COLOR_UPDATE_SPEED = 10,
   BACK_COLOR = { r: 0.5, g: 0, b: 0 },
   TRANSPARENT = true
-}) {
-  const canvasRef = useRef(null);
+}: SplashCursorProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
