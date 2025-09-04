@@ -215,7 +215,7 @@ const LandingPage = () => {
       setCurrentFeature((prev) => (prev + 1) % features.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [features.length]);
 
   return (
     <div ref={containerRef} className="min-h-screen text-white overflow-hidden relative">
