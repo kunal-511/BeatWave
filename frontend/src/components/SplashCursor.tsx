@@ -631,8 +631,8 @@ function SplashCursor({
     }
 
     function createDoubleFBO(w, h, internalFormat, format, type, param) {
-      const fbo1 = createFBO(w, h, internalFormat, format, type, param);
-      const fbo2 = createFBO(w, h, internalFormat, format, type, param);
+      let fbo1 = createFBO(w, h, internalFormat, format, type, param);
+      let fbo2 = createFBO(w, h, internalFormat, format, type, param);
       return {
         width: w,
         height: h,
