@@ -5,20 +5,23 @@ export const trackSongPlay = async (req, res, next) => {
         const { songId } = req.params;
         const userId = req.auth?.userId;
 
+
         if (!userId || !songId) {
             return res.status(400).json({ error: 'Missing required data' });
         }
+        
         await client.zIncrBy('songs:plays:global', 1, songId);
         await client.zIncrBy(`songs:plays:user:${userId}`, 1, songId);
 
         const hour = new Date().toISOString().slice(0, 13);
         await client.zIncrBy(`analytics:hourly:${hour}`, 1, songId);
 
-        await client.lpush(`user:${userId}:recent`, songId);
-        await client.ltrim(`user:${userId}:recent`, 0, 49);
+        await client.lPush(`user:${userId}:recent`, songId);
+        await client.lTrim(`user:${userId}:recent`, 0, 49);
 
         res.json({ success: true });
     } catch (error) {
+        console.error("Error in trackSongPlay:", error);
         next(error);
     }
 }
