@@ -75,9 +75,9 @@ export const initializeSocket = (server) => {
 				// find disconnected user
 				if (socketId === socket.id) {
 					disconnectedUserId = userId;
-					await client.hdel('user:sockets', userId);
-					await client.srem('users:online', userId);
-					await client.hdel('user:activities', userId);
+					await client.hDel('user:sockets', userId);
+					await client.sRem('users:online', userId);
+					await client.hDel('user:activities', userId);
 					break;
 				}
 			}
