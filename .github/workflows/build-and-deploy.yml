@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [production]
 
+permissions:
+  contents: read
+  packages: write
+
 env:
   REGISTRY: ghcr.io
   FRONTEND_IMAGE_NAME: kunal-511/beatwave
@@ -78,6 +82,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          logout: false
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -125,6 +130,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          logout: false
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -163,6 +169,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/production'
     permissions:
       contents: write
+      packages: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
