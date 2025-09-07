@@ -1,5 +1,5 @@
 # Use an official Node runtime as the base image
-FROM node:20-alpine
+FROM node:20-alpine AS build
 
 # Set working directory in the container
 WORKDIR /app
@@ -18,8 +18,20 @@ COPY frontend/ .
 ARG VITE_CLERK_PUBLISHABLE_KEY
 ENV VITE_CLERK_PUBLISHABLE_KEY=$VITE_CLERK_PUBLISHABLE_KEY
 
-# Expose port 
-EXPOSE 3000
+# Build the application
+RUN yarn build
 
-# Start Vite dev server with host set to listen on all interfaces
-CMD ["yarn", "dev", "--host", "0.0.0.0", "--port", "3000"]
+# Production stage
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+
+
+# Dev Mode
+# # Expose port 
+# EXPOSE 3000
+
+# # Start Vite dev server with host set to listen on all interfaces
+# CMD ["yarn", "dev", "--host", "0.0.0.0", "--port", "3000"]
