@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: beatwave-backend
-        image: ghcr.io/kunal-511/beatwave-backend:v2
+        image: ghcr.io/kunal-511/beatwave-backend:v0.0.1
         ports:
         - containerPort: 5000
         env:
