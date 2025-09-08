@@ -2,8 +2,10 @@ import { createClient } from 'redis';
 
 
 const client = createClient({
-    host: process.env.REDIS_HOST || 'localhost',
-    port: process.env.REDIS_PORT || 6379,
+    url: `redis://${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}`,
+    socket: {
+        reconnectStrategy: (retries) => Math.min(retries * 50, 1000)
+    },
     retryDelayOnFailover: 100,
     maxRetriesPerRequest: 3,
     lazyConnect: true,

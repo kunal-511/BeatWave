@@ -70,13 +70,13 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **Docker** for containerization and deployment
 
 
-````
 
 ## ⚙️ Getting Started
 
 ### Prerequisites
 - Node.js 18+ installed  
 - MongoDB database (local or cloud)  
+- Redis server (local or cloud)
 - Cloudinary account for media storage  
 - Clerk account for authentication  
 
@@ -86,7 +86,6 @@ BeatWave is a comprehensive music streaming application that provides seamless m
    ```bash
    git clone https://github.com/kunal-2004/beatwave.git
    cd beatwave ```
-
 
 2. **Install dependencies**
 
@@ -103,6 +102,8 @@ BeatWave is a comprehensive music streaming application that provides seamless m
    ```env
    PORT=5000
    MONGODB_URI=your_mongodb_connection_string
+   REDIS_HOST=localhost
+   REDIS_PORT=6379
    CLERK_SECRET_KEY=your_clerk_secret_key
    CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
    CLOUDINARY_API_KEY=your_cloudinary_api_key
@@ -118,7 +119,17 @@ BeatWave is a comprehensive music streaming application that provides seamless m
    VITE_API_URL=http://localhost:5000
    ```
 
-4. **Start the development servers**
+4. **Start Redis server**
+
+   ```bash
+   # Start Redis server locally
+   redis-server
+   
+   # Or using Docker
+   docker run -d -p 6379:6379 redis:7.2-alpine
+   ```
+
+5. **Start the development servers**
 
    ```bash
    # Start backend server
@@ -128,7 +139,7 @@ BeatWave is a comprehensive music streaming application that provides seamless m
    cd frontend && npm run dev
    ```
 
-5. **Access the application**
+6. **Access the application**
 
    * Frontend: `http://localhost:5173`
    * Backend API: `http://localhost:5000`
