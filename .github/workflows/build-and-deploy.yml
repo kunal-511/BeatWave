@@ -99,7 +99,7 @@ jobs:
             type=raw,value=v${{ needs.versioning.outputs.major }}.${{ needs.versioning.outputs.minor }}
 
       - name: Build and push Backend Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./backend/dockerfile
@@ -147,7 +147,7 @@ jobs:
             type=raw,value=v${{ needs.versioning.outputs.major }}.${{ needs.versioning.outputs.minor }}
 
       - name: Build and push Frontend Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./frontend/dockerfile
