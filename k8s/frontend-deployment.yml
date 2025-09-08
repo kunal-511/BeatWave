@@ -19,10 +19,13 @@ spec:
       - name: beatwave-frontend
         image: ghcr.io/kunal-511/beatwave:v0.0.1
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         env:
         - name: VITE_CLERK_PUBLISHABLE_KEY
           valueFrom:
             secretKeyRef:
               name: backend-secrets
               key: VITE_CLERK_PUBLISHABLE_KEY
+        
+        - name: VITE_API_URL
+          value: "http://backend:5000/api"

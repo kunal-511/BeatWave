@@ -18,4 +18,4 @@ spec:
         image: redis:7.2-alpine
         ports:
         - containerPort: 6379
-        commands: ["redis-server", "--appendonly", "yes"]
+        command: ["redis-server", "--appendonly", "yes"]
