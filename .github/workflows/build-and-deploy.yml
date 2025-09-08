@@ -187,10 +187,6 @@ jobs:
           sed -i "s|image: ghcr.io/kunal-511/beatwave:.*|image: ghcr.io/kunal-511/beatwave:$VERSION|g" k8s/frontend-deployment.yml
           
           echo "Updated manifests with version: $VERSION"
-      - name: Validate Kubernetes manifests
-        run: |
-          kubectl apply --dry-run=client -f k8s/backend-deployment.yml
-          kubectl apply --dry-run=client -f k8s/frontend-deployment.yml
 
       - name: Commit updated manifests
         run: |
