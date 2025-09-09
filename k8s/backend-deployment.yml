@@ -40,6 +40,16 @@ spec:
             configMapKeyRef:
               name: backend-port
               key: NODE_ENV
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: backend-port
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-port
+              key: REDIS_PORT
 
         - name: MONGODB_URI
           valueFrom:
