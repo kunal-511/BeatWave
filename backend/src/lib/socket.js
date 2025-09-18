@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 import { Message } from "../models/message.model.js";
-import client from "./redis.js";
+import client from "./memoryCache.js";
 
 export const initializeSocket = (server) => {
 	const io = new Server(server, {
