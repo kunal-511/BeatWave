@@ -1,4 +1,4 @@
-import client from "../lib/redis.js";
+import client from "../lib/memoryCache.js";
 import {Song} from "../models/song.model.js"
 export const trackSongPlay = async (req, res, next) => {
     try {
@@ -29,7 +29,7 @@ export const trackSongPlay = async (req, res, next) => {
 
 export const getTrendingSongs = async (req, res, next) => {
     try {
-        const trendingIds = await client.ZRANGE('songs:plays:global', 0, 9);
+        const trendingIds = await client.zRange('songs:plays:global', 0, 9);
         console.log("from redis", trendingIds);
 
         if (trendingIds.length === 0) {

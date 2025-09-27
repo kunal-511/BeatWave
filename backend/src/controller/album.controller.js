@@ -1,5 +1,5 @@
 import { Album } from "../models/album.model.js";
-import client from "../lib/redis.js";
+import client from "../lib/memoryCache.js";
 
 export const getAllAlbums = async (req, res, next) => {
 

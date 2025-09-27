@@ -1,17 +1,15 @@
 import { Song } from "../models/song.model.js";
 import { Album } from "../models/album.model.js";
-import cloudinary from "../lib/cloudinary.js";
+import { uploadToR2 } from "../lib/r2.js";
 
 
-const uploadToCloudinary = async (file) => {
+const uploadFile = async (file, folder = "") => {
 	try {
-		const result = await cloudinary.uploader.upload(file.tempFilePath, {
-			resource_type: "auto",
-		});
-		return result.secure_url;
+		const fileUrl = await uploadToR2(file, folder);
+		return fileUrl;
 	} catch (error) {
-		console.log("Error in uploadToCloudinary", error);
-		throw new Error("Error uploading to cloudinary");
+		console.log("Error in uploadFile", error);
+		throw new Error("Error uploading file");
 	}
 };
 
@@ -25,8 +23,8 @@ export const createSong = async (req, res, next) => {
 		const audioFile = req.files.audioFile;
 		const imageFile = req.files.imageFile;
 
-		const audioUrl = await uploadToCloudinary(audioFile);
-		const imageUrl = await uploadToCloudinary(imageFile);
+		const audioUrl = await uploadFile(audioFile, "audio/");
+		const imageUrl = await uploadFile(imageFile, "images/");
 
 		const song = new Song({
 			title,
@@ -78,7 +76,7 @@ export const createAlbum = async (req, res, next) => {
 		const { title, artist, releaseYear } = req.body;
 		const { imageFile } = req.files;
 
-		const imageUrl = await uploadToCloudinary(imageFile);
+		const imageUrl = await uploadFile(imageFile, "images/");
 
 		const album = new Album({
 			title,

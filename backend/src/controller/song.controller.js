@@ -1,5 +1,5 @@
 import { Song } from "../models/song.model.js";
-import client from "../lib/redis.js";
+import client from "../lib/memoryCache.js";
 export const getAllSongs = async (req, res, next) => {
 	try {
 		// -1 = Descending => newest -> oldest
