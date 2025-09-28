@@ -58,7 +58,7 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **Node.js** with Express.js framework  
 - **MongoDB** with Mongoose ODM for data persistence  
 - **Socket.io** for real-time WebSocket communication  
-- **Cloudinary** for media storage and optimization  
+- **Cloudflare R2(similar to S3)** for media storage and optimization  
 - **Clerk** for user authentication and management  
 - **CORS** enabled for cross-origin requests
 - **Redis** for in memory storage
@@ -77,7 +77,7 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - Node.js 18+ installed  
 - MongoDB database (local or cloud)  
 - Redis server (local or cloud)
-- Cloudinary account for media storage  
+- Cloudflare account for media storage  
 - Clerk account for authentication  
 
 ### Installation
@@ -101,14 +101,16 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 
    ```env
    PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
+   MONGODB_URI=
    REDIS_HOST=localhost
    REDIS_PORT=6379
-   CLERK_SECRET_KEY=your_clerk_secret_key
-   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUDINARY_API_KEY=your_cloudinary_api_key
-   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-   ADMIN_EMAIL=your_admin_email
+   CLERK_SECRET_KEY=
+   R2_ACCOUNT_ID=
+   R2_ACCESS_KEY_ID=
+   R2_SECRET_ACCESS_KEY=
+   R2_BUCKET_NAME=
+   R2_PUBLIC_URL
+   ADMIN_EMAIL=
    NODE_ENV=development
    ```
 
