@@ -73,6 +73,10 @@ app.use("/api/stats", statRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
+app.use("/health", (req, res) => {
+	res.status(200).send("Server is healthy");
+});
+
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "../frontend/dist")));
 	app.get("*", (req, res) => {
