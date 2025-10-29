@@ -76,7 +76,9 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/health", (req, res) => {
 	res.status(200).send("Server is healthy");
 });
-
+app.use("/", (req, res) => {
+	res.status(200).send("Welcome to BeatWave Backend!");
+});
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "../frontend/dist")));
 	app.get("*", (req, res) => {
