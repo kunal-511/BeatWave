@@ -61,7 +61,7 @@ BeatWave is a comprehensive music streaming application that provides seamless m
 - **Cloudflare R2(similar to S3)** for media storage and optimization  
 - **Clerk** for user authentication and management  
 - **CORS** enabled for cross-origin requests
-- **Redis** for in memory storage
+- **Redis** for caching and session management
 
 ### Development Tools
 - **ESLint** for code linting and consistency  

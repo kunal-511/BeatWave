@@ -1,4 +1,4 @@
-import client from "../lib/memoryCache.js";
+import client from "../lib/redis.js";
 import {Song} from "../models/song.model.js"
 export const trackSongPlay = async (req, res, next) => {
     try {
