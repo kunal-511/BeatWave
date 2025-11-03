@@ -1,6 +1,7 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
 import crypto from "crypto";
+import fs from "fs";
 
 dotenv.config();
 
@@ -18,16 +19,22 @@ export const uploadToR2 = async (file, folder = "") => {
 		const fileExtension = file.name.split('.').pop();
 		const fileName = `${folder}${crypto.randomUUID()}.${fileExtension}`;
 
+
+		const fileBuffer = file.tempFilePath 
+			? fs.readFileSync(file.tempFilePath)
+			: file.data;
+
 		const command = new PutObjectCommand({
 			Bucket: process.env.R2_BUCKET_NAME,
 			Key: fileName,
-			Body: file.data,
+			Body: fileBuffer,
 			ContentType: file.mimetype,
+			CacheControl: 'public, max-age=31536000',
 		});
 
 		await r2Client.send(command);
 
-		const fileUrl = `https://${process.env.R2_PUBLIC_URL}/${fileName}`;
+		const fileUrl = `${process.env.R2_PUBLIC_URL}/${fileName}`;
 		return fileUrl;
 	} catch (error) {
 		console.log("Error in uploadToR2", error);
