@@ -2,9 +2,9 @@ name: Build and Deploy to Production
 
 on:
   push:
-    branches: [production]
+    branches: [production, custom-deployment-k8s]
   pull_request:
-    branches: [production]
+    branches: [production, custom-deployment-k8s]
 
 permissions:
   contents: read
@@ -161,6 +161,7 @@ jobs:
             BUILDTIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
             VERSION=${{ needs.versioning.outputs.version }}
             VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+            VITE_API_URL=/api
 
   # Update Kubernetes deployment files
   update-k8s-manifests:
@@ -181,10 +182,10 @@ jobs:
           VERSION=${{ needs.versioning.outputs.version }}
           
           # Update backend deployment
-          sed -i "s|image: ghcr.io/kunal-511/beatwave-backend:.*|image: ghcr.io/kunal-511/beatwave-backend:$VERSION|g" k8s/backend-deployment.yml
+          sed -i "s|image: .*beatwave-backend:.*|image: ghcr.io/kunal-511/beatwave-backend:$VERSION|g" manifests/base/backend-deployment.yaml
           
           # Update frontend deployment
-          sed -i "s|image: ghcr.io/kunal-511/beatwave:.*|image: ghcr.io/kunal-511/beatwave:$VERSION|g" k8s/frontend-deployment.yml
+          sed -i "s|image: .*beatwave-frontend:.*|image: ghcr.io/kunal-511/beatwave-frontend:$VERSION|g" manifests/base/frontend-deployment.yaml
           
           echo "Updated manifests with version: $VERSION"
 
@@ -192,7 +193,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add k8s/
+          git add manifests/
           git diff --staged --quiet || git commit -m "chore: update K8s manifests to ${{ needs.versioning.outputs.version }} [skip ci]"
           git push
 

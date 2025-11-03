@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beatwave-redis
+  labels:
+    environment: production
+    tier: database
+spec:
+  template:
+    metadata:
+      labels:
+        environment: production
+        tier: database

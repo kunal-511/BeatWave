@@ -32,6 +32,3 @@ logs
 
 # IDE & editor configs
 .vscode
-backend/.env
-frontend/.env
-**/.env

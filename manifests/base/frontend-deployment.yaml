@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: beatwave-frontend
+  namespace: beatwave
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beatwave-frontend
+  template:
+    metadata:
+      labels:
+        app: beatwave-frontend
+    spec:
+      containers:
+        - name: beatwave-frontend
+          image: ghcr.io/kunal-511/beatwave:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: beatwave-frontend-config

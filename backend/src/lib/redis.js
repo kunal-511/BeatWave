@@ -2,7 +2,7 @@ import { createClient } from 'redis';
 
 
 const client = createClient({
-    url: `redis://${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}`,
+    url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     socket: {
         reconnectStrategy: (retries) => Math.min(retries * 50, 1000)
     },

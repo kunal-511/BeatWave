@@ -5,7 +5,9 @@ import client from "./redis.js";
 export const initializeSocket = (server) => {
 	const io = new Server(server, {
 		cors: {
-			origin: "http://localhost:3000",
+			origin: process.env.NODE_ENV === "production" 
+				? true 
+				: ["http://localhost:3000", "http://localhost:5173"],
 			credentials: true,
 		},
 	});

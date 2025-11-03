@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: beatwave-backend-config
+  namespace: beatwave
+data:
+  PORT: "5000"
+  REDIS_HOST: "beatwave-redis"
+  REDIS_PORT: "6379"
+  NODE_ENV: "production"
+  ADMIN_EMAIL: "yoyokvunal@gmail.com"

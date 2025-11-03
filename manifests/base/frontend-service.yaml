@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: beatwave-frontend
+  namespace: beatwave
+spec:
+  selector:
+    app: beatwave-frontend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: NodePort

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: beatwave-backend
+  namespace: beatwave
+spec:
+  selector:
+    app: beatwave-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP

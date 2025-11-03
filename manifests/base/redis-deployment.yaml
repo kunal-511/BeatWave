@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: beatwave-redis
+  namespace: beatwave
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beatwave-redis
+  template:
+    metadata:
+      labels:
+        app: beatwave-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379

@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: beatwave-backend
+  namespace: beatwave
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beatwave-backend
+  template:
+    metadata:
+      labels:
+        app: beatwave-backend
+    spec:
+      containers:
+        - name: beatwave-backend
+          image: ghcr.io/kunal-511/beatwave-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: beatwave-backend-config
+            - secretRef:
+                name: beatwave-backend-secrets
