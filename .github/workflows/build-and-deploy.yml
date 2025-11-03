@@ -182,10 +182,10 @@ jobs:
           VERSION=${{ needs.versioning.outputs.version }}
           
           # Update backend deployment
-          sed -i "s|image: .*beatwave-backend:.*|image: ghcr.io/kunal-511/beatwave-backend:$VERSION|g" manifests/base/backend-deployment.yaml
+          sed -i "s|image: ghcr.io/kunal-511/beatwave-backend:.*|image: ghcr.io/kunal-511/beatwave-backend:$VERSION|g" manifests/base/backend-deployment.yaml
           
-          # Update frontend deployment
-          sed -i "s|image: .*beatwave-frontend:.*|image: ghcr.io/kunal-511/beatwave-frontend:$VERSION|g" manifests/base/frontend-deployment.yaml
+          # Update frontend deployment  
+          sed -i "s|image: ghcr.io/kunal-511/beatwave:.*|image: ghcr.io/kunal-511/beatwave:$VERSION|g" manifests/base/frontend-deployment.yaml
           
           echo "Updated manifests with version: $VERSION"
 
