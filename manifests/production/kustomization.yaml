@@ -5,6 +5,9 @@ metadata:
 namespace: beatwave-production
 resources:
   - ../base
+  - backend-hpa.yaml
+  - frontend-hpa.yaml
+  - redis-hpa.yaml
 patches:
   - path: backend-labels.yaml
   - path: frontend-labels.yaml
@@ -12,6 +15,4 @@ patches:
   - path: backend-resources.yaml
   - path: frontend-resources.yaml
   - path: redis-resources.yaml
-  - path: backend-replicas.yaml
-  - path: frontend-replicas.yaml
   - path: backend-secrets.yaml
