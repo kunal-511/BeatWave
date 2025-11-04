@@ -1,6 +1,6 @@
 # Kubernetes Manifests
 
-## For Kubernetes deployment, please refer to the `custom-deployment-k8s` documentation and manifests.
+## For Kubernetes deployment, please refer to the `custom-deployment-k8s` branch documentation and manifests.
 
 This directory contains the Kubernetes manifest files for deploying the BeatWave application.
 

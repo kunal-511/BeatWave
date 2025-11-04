@@ -164,7 +164,7 @@ docker-compose up -d
 
 ### Kubernetes Deployment
 
-For Kubernetes deployment, please refer to the `custom-deployment-k8s` documentation and manifests.
+For Kubernetes deployment, please refer to the `custom-deployment-k8s` branch documentation and manifests.
 
 
 ---
