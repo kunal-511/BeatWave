@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: beatwave-frontend
-          image: ghcr.io/kunal-511/beatwave:v2.0.0
+          image: ghcr.io/kunal-511/beatwave:v1.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
