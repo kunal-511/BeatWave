@@ -2,7 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: beatwave-backend
-  namespace: beatwave
 spec:
   selector:
     app: beatwave-backend

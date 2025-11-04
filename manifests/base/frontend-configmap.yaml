@@ -2,8 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: beatwave-frontend-config
-  namespace: beatwave
 data:
   VITE_CLERK_PUBLISHABLE_KEY: "pk_test_b25lLXRyb2xsLTcuY2xlcmsuYWNjb3VudHMuZGV2JA"
   VITE_RAZORPAY_KEY_ID: "rzp_test_zOhpl2KPINrq20"
-  VITE_API_URL: "http://localhost:5000/api"
+  VITE_API_URL: "/api"

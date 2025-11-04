@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: beatwave-mongodb
-  namespace: beatwave
 spec:
   serviceName: beatwave-mongodb
   replicas: 1

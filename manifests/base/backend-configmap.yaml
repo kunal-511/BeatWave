@@ -2,7 +2,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: beatwave-backend-config
-  namespace: beatwave
 data:
   PORT: "5000"
   REDIS_HOST: "beatwave-redis"

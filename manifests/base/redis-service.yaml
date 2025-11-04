@@ -2,7 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: beatwave-redis
-  namespace: beatwave
 spec:
   selector:
     app: beatwave-redis

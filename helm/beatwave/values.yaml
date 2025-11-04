@@ -70,7 +70,7 @@ frontend:
   config:
     viteClerkPublishableKey: "pk_test_b25lLXRyb2xsLTcuY2xlcmsuYWNjb3VudHMuZGV2JA"
     viteRazorpayKeyId: "rzp_test_zOhpl2KPINrq20"
-    viteApiUrl: "http://localhost:5000/api"
+    viteApiUrl: "/api"
 
 # Redis configuration
 redis:
@@ -102,7 +102,7 @@ mongodb:
     database: "beatwave_db"
   persistence:
     enabled: true
-    storageClass: ""  # Leave empty to use default storage class
+    storageClass: ""    
     data:
       size: 5Gi
       accessMode: ReadWriteOnce

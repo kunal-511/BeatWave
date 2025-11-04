@@ -2,10 +2,9 @@ kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 metadata:
   name: beatwave-production
-  namespace: beatwave-production
+namespace: beatwave-production
 resources:
   - ../base
-  - production-namespace.yaml
 patches:
   - path: backend-labels.yaml
   - path: frontend-labels.yaml
@@ -15,3 +14,4 @@ patches:
   - path: redis-resources.yaml
   - path: backend-replicas.yaml
   - path: frontend-replicas.yaml
+  - path: backend-secrets.yaml
