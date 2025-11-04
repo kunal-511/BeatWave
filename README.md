@@ -164,39 +164,8 @@ docker-compose up -d
 
 ### Kubernetes Deployment
 
-Deploy using Kubernetes manifests:
+For Kubernetes deployment, please refer to the `custom-deployment-k8s` documentation and manifests.
 
-```bash
-# Apply all Kubernetes configurations
-kubectl apply -f k8s/
-
-# Check deployment status
-kubectl get pods -n beatwave
-kubectl get services -n beatwave
-```
-
-### Helm Chart Deployment
-
-Deploy using Helm charts for easier management:
-
-```bash
-# Install the Helm chart
-helm install beatwave ./helm/beatwave
-
-# Upgrade existing deployment
-helm upgrade beatwave ./helm/beatwave
-
-# Check deployment status
-helm status beatwave
-```
-
-**Helm Configuration:**
-
-* Configurable replicas and resources
-* Environment-specific values
-* Ingress configuration for external access
-* ConfigMaps and Secrets management
-* Health checks and monitoring
 
 ---
 
@@ -214,9 +183,11 @@ beatwave/
 │   ├── pages/
 │   ├── hooks/
 │   └── ...
+├── manifests
+|    ├── base/
+|    └── production/
+|
 ├── docker-compose.yml
 ├── README.md
 └── ...
-```
 
-```
