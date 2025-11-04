@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beatwave-{{ .Values.backend.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "beatwave.labels" . | nindent 4 }}
+    app: beatwave-{{ .Values.backend.name }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: beatwave-{{ .Values.backend.name }}
+  template:
+    metadata:
+      labels:
+        app: beatwave-{{ .Values.backend.name }}
+    spec:
+      containers:
+        - name: beatwave-{{ .Values.backend.name }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.backend.service.port }}
+          envFrom:
+            - configMapRef:
+                name: beatwave-{{ .Values.backend.name }}-config
+            - secretRef:
+                name: beatwave-{{ .Values.backend.name }}-secrets
+          {{- if .Values.backend.logSidecar.enabled }}
+          volumeMounts:
+            - name: log-volume
+              mountPath: {{ .Values.backend.logSidecar.logPath }}
+          {{- end }}
+        {{- if .Values.backend.logSidecar.enabled }}
+        - name: log-sidecar
+          image: "{{ .Values.backend.logSidecar.image.repository }}:{{ .Values.backend.logSidecar.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.logSidecar.image.pullPolicy }}
+          command: ["/bin/sh"]
+          args: 
+            - "-c"
+            - "tail -f {{ .Values.backend.logSidecar.logPath }}/{{ .Values.backend.logSidecar.logFile }} 2>/dev/null || tail -f /dev/null"
+          volumeMounts:
+            - name: log-volume
+              mountPath: {{ .Values.backend.logSidecar.logPath }}
+          {{- with .Values.backend.logSidecar.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        {{- end }}
+      {{- if .Values.backend.logSidecar.enabled }}
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+      {{- end }}
+

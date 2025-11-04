@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: beatwave-{{ .Values.frontend.name }}-config
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "beatwave.labels" . | nindent 4 }}
+    app: beatwave-{{ .Values.frontend.name }}
+data:
+  VITE_CLERK_PUBLISHABLE_KEY: {{ .Values.frontend.config.viteClerkPublishableKey | quote }}
+  VITE_RAZORPAY_KEY_ID: {{ .Values.frontend.config.viteRazorpayKeyId | quote }}
+  VITE_API_URL: {{ .Values.frontend.config.viteApiUrl | quote }}
+

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: beatwave-{{ .Values.frontend.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "beatwave.labels" . | nindent 4 }}
+    app: beatwave-{{ .Values.frontend.name }}
+spec:
+  type: {{ .Values.frontend.service.type }}
+  selector:
+    app: beatwave-{{ .Values.frontend.name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.frontend.service.port }}
+      targetPort: {{ .Values.frontend.service.port }}
+

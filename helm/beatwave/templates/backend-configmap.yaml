@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: beatwave-{{ .Values.backend.name }}-config
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "beatwave.labels" . | nindent 4 }}
+    app: beatwave-{{ .Values.backend.name }}
+data:
+  PORT: {{ .Values.backend.config.port | quote }}
+  REDIS_HOST: {{ .Values.backend.config.redisHost | quote }}
+  REDIS_PORT: {{ .Values.backend.config.redisPort | quote }}
+  NODE_ENV: {{ .Values.backend.config.nodeEnv | quote }}
+  ADMIN_EMAIL: {{ .Values.backend.config.adminEmail | quote }}
+

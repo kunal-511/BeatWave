@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beatwave-{{ .Values.redis.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "beatwave.labels" . | nindent 4 }}
+    app: beatwave-{{ .Values.redis.name }}
+spec:
+  replicas: {{ .Values.redis.replicaCount }}
+  selector:
+    matchLabels:
+      app: beatwave-{{ .Values.redis.name }}
+  template:
+    metadata:
+      labels:
+        app: beatwave-{{ .Values.redis.name }}
+    spec:
+      containers:
+        - name: {{ .Values.redis.name }}
+          image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
+          imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.redis.service.port }}
+

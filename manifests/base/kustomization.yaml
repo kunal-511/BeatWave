@@ -14,3 +14,6 @@ resources:
   - frontend-deployment.yaml
   - frontend-service.yaml
   - ingress.yaml
+  - mongodb-statefulset.yaml
+  - mongodb-service.yaml
+  - mongodb-secrets.yaml

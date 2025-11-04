@@ -1,0 +1,44 @@
+🎵 BeatWave has been deployed successfully!
+
+Chart Version: {{ .Chart.Version }}
+App Version: {{ .Chart.AppVersion }}
+Namespace: {{ .Values.namespace }}
+
+🚀 Deployment Summary:
+- Backend: {{ .Values.backend.replicaCount }} replica(s)
+  Image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+  
+- Frontend: {{ .Values.frontend.replicaCount }} replica(s)
+  Image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+  
+- Redis: {{ .Values.redis.replicaCount }} replica(s)
+  Image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
+
+- MongoDB: {{ .Values.mongodb.replicaCount }} replica(s)
+  Image: {{ .Values.mongodb.image.repository }}:{{ .Values.mongodb.image.tag }}
+  Persistent Storage: {{ if .Values.mongodb.persistence.enabled }}Enabled{{ else }}Disabled{{ end }}
+
+{{- if .Values.ingress.enabled }}
+
+🌐 Access your application:
+  Ingress is enabled. You can access BeatWave through your ingress controller.
+  
+  Frontend: http://<your-ingress-host>/
+  Backend API: http://<your-ingress-host>/api
+
+{{- else }}
+
+📝 To access your application:
+  
+  1. Port-forward the frontend service:
+     kubectl port-forward -n {{ .Values.namespace }} svc/beatwave-{{ .Values.frontend.name }} 3000:3000
+     
+  2. Port-forward the backend service:
+     kubectl port-forward -n {{ .Values.namespace }} svc/beatwave-{{ .Values.backend.name }} 5000:5000
+
+  3. Access the application at:
+     Frontend: http://localhost:3000
+     Backend API: http://localhost:5000/api
+
+{{- end }}
+

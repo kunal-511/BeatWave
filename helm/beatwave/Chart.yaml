@@ -1,0 +1,13 @@
+apiVersion: v2
+name: beatwave
+description: A Helm chart for BeatWave - Full-Stack Music Streaming Application
+type: application
+version: 2.0.0
+appVersion: "2.0.0"
+home: https://github.com/kunal-511/BeatWave
+sources:
+  - https://github.com/kunal-511/BeatWave
+maintainers:
+  - name: Kunal Dugar
+    email: yoyokvunal@gmail.com
+

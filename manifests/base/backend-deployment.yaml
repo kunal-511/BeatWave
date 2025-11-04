@@ -24,3 +24,23 @@ spec:
                 name: beatwave-backend-config
             - secretRef:
                 name: beatwave-backend-secrets
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/beatwave
+        - name: log-sidecar
+          image: busybox:latest
+          command: ["/bin/sh"]
+          args: ["-c", "tail -f /var/log/beatwave/app.log 2>/dev/null || tail -f /dev/null"]
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log/beatwave
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+      volumes:
+        - name: log-volume
+          emptyDir: {}

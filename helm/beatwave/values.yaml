@@ -1,0 +1,146 @@
+# Default values for beatwave
+
+# Override the name of the chart
+nameOverride: ""
+
+# Override the full name of the chart
+fullnameOverride: ""
+
+namespace: beatwave
+
+# Backend configuration
+backend:
+  name: backend
+  replicaCount: 1
+  image:
+    repository: ghcr.io/kunal-511/beatwave-backend
+    tag: v2.0.0
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 5000
+  # Log sidecar configuration
+  logSidecar:
+    enabled: true
+    image:
+      repository: busybox
+      tag: latest
+      pullPolicy: IfNotPresent
+    logPath: /var/log/beatwave
+    logFile: app.log
+    resources:
+      requests:
+        memory: "32Mi"
+        cpu: "50m"
+      limits:
+        memory: "64Mi"
+        cpu: "100m"
+  config:
+    port: "5000"
+    nodeEnv: "production"
+    adminEmail: "yoyokvunal@gmail.com"
+    redisHost: "beatwave-redis"
+    redisPort: "6379"
+  secrets:
+    clerkSecretKey: "sk_test_Adw0KTRW2iPCapS5CLH7lp11jD4smATfy03RZzXkRO"
+    clerkPublishableKey: "pk_test_b25lLXRyb2xsLTcuY2xlcmsuYWNjb3VudHMuZGV2JA"
+    r2AccessKeyId: "d32c05a8cf9e10c9a5f9c926ee25016a"
+    r2SecretAccessKey: "4413ca96394cae214a968d958662c020f28ef750be3416488da2de6bf3956dfb"
+    r2AccountId: "d80940774294305ead9478c166f3f74b"
+    r2BucketName: "beatwave-bucket"
+    r2PublicUrl: "https://pub-9414df13a4124b6796e9532dd94f4ab8.r2.dev"
+    mongodbUri: "mongodb://admin:password123@beatwave-mongodb:27017/beatwave_db?authSource=admin"
+    razorpayKeyId: "rzp_test_zOhpl2KPINrq20"
+    razorpayKeySecret: "05kRpC9bdgvFeZIqURA62jXz"
+    cloudinaryApiKey: "183376254914523"
+    cloudinaryApiSecret: "I_390-QsdGBlVnJb0B30qz-ywY0"
+    cloudinaryCloudName: "dxevfrvvd"
+
+# Frontend configuration
+frontend:
+  name: frontend
+  replicaCount: 1
+  image:
+    repository: ghcr.io/kunal-511/beatwave
+    tag: v2.0.0
+    pullPolicy: Always
+  service:
+    type: NodePort
+    port: 3000
+  config:
+    viteClerkPublishableKey: "pk_test_b25lLXRyb2xsLTcuY2xlcmsuYWNjb3VudHMuZGV2JA"
+    viteRazorpayKeyId: "rzp_test_zOhpl2KPINrq20"
+    viteApiUrl: "http://localhost:5000/api"
+
+# Redis configuration
+redis:
+  name: redis
+  replicaCount: 1
+  image:
+    repository: redis
+    tag: 7-alpine
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 6379
+
+# MongoDB configuration
+mongodb:
+  enabled: true  
+  name: mongodb
+  replicaCount: 1
+  image:
+    repository: mongo
+    tag: "7.0"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 27017
+  auth:
+    rootUsername: "admin"
+    rootPassword: "password123"
+    database: "beatwave_db"
+  persistence:
+    enabled: true
+    storageClass: ""  # Leave empty to use default storage class
+    data:
+      size: 5Gi
+      accessMode: ReadWriteOnce
+    config:
+      size: 1Gi
+      accessMode: ReadWriteOnce
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+# Ingress configuration
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+  rules:
+    - paths:
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: beatwave-backend
+              port: 5000
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: beatwave-frontend
+              port: 3000
+

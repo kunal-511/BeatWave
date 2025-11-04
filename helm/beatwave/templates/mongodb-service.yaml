@@ -1,0 +1,21 @@
+{{- if .Values.mongodb.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: beatwave-{{ .Values.mongodb.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "beatwave.labels" . | nindent 4 }}
+    app: beatwave-{{ .Values.mongodb.name }}
+spec:
+  type: {{ .Values.mongodb.service.type }}
+  clusterIP: None  
+  selector:
+    app: beatwave-{{ .Values.mongodb.name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.mongodb.service.port }}
+      targetPort: {{ .Values.mongodb.service.port }}
+      name: mongodb
+{{- end }}
+
