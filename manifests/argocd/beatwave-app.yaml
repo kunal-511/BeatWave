@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: beatwave-base
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/kunal-511/beatwave.git
+    targetRevision: custom-deployment-k8s
+    path: manifests/base
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: beatwave
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
