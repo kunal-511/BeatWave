@@ -26,3 +26,12 @@ dist-ssr
 features*
 go-backend
 DEPLOYMENT.md
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+.terraform.lock.hcl
+crash.log
