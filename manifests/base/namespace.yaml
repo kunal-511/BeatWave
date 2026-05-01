@@ -2,3 +2,5 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: beatwave
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"

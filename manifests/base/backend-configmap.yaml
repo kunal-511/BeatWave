@@ -2,6 +2,8 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: beatwave-backend-config
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
 data:
   PORT: "5000"
   REDIS_HOST: "beatwave-redis"

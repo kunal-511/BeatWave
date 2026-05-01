@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: beatwave-ingress
   annotations:
+    argocd.argoproj.io/sync-wave: "1"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"

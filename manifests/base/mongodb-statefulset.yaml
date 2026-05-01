@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: beatwave-mongodb
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   serviceName: beatwave-mongodb
   replicas: 1
