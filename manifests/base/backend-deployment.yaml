@@ -24,7 +24,9 @@ spec:
             - configMapRef:
                 name: beatwave-backend-config
             - secretRef:
-                name: beatwave-backend-secrets
+                name: beatwave-backend-secrets 
+            - secretRef:
+                name: beatwave-backend-mongo-secret
           volumeMounts:
             - name: log-volume
               mountPath: /var/log/beatwave
