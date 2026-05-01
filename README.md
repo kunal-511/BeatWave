@@ -4,6 +4,10 @@
 **Full-Stack Music Streaming Application**
  A modern, feature-rich music streaming platform built with TypeScript, React, Express, and real-time WebSocket communication. Connect, stream, and vibe with friends!
 
+  Deployed end-to-end on AWS EKS using a production-grade Kubernetes setup I built from scratch — provisioned with Terraform (S3 backend + DynamoDB state locking), GitOps-managed via ArgoCD with automated sync
+  and self-healing, and served through a single AWS Application Load Balancer using the ALB Ingress Controller with IngressGroups. Secrets are pulled at runtime from AWS Parameter Store via the External Secrets Operator. Application health and infrastructure metrics are monitored with Prometheus + Grafana. The full CI/CD pipeline runs on GitHub Actions — building Docker images, pushing to DockerHub, and triggering
+  ArgoCD to roll out new versions automatically. Accessible at beatwave.bykunal.codes.  
+
 ---
 
 ## 📌 Overview
