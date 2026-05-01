@@ -7,8 +7,6 @@ resources:
   - namespace.yaml
   - backend-configmap.yaml
   - backend-secrets.yaml
-  - ../external-secrets/cluster-secret-store.yaml
-  - ../external-secrets/backend-external-secret.yaml
   - backend-deployment.yaml
   - backend-service.yaml
   - redis-deployment.yaml
