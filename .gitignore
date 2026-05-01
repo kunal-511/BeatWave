@@ -26,6 +26,7 @@ dist-ssr
 features*
 go-backend
 DEPLOYMENT.md
+dump
 
 # Terraform
 **/.terraform/
