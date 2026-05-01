@@ -7,17 +7,20 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/group.name: beatwave          
+    alb.ingress.kubernetes.io/group.name: beatwave
     alb.ingress.kubernetes.io/group.order: "20"
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:966042699557:certificate/45d73d85-b16b-4cbb-9a59-9caa7fc5cfc5
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/backend-protocol: HTTP
     alb.ingress.kubernetes.io/healthcheck-path: /healthz
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: beatwave-argocd.bykunal.codes
+      http:
         paths:
-          - path: /argocd
+          - path: /
             pathType: Prefix
             backend:
               service:

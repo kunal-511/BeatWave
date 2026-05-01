@@ -9,13 +9,16 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/group.name: beatwave
     alb.ingress.kubernetes.io/group.order: "10"
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:966042699557:certificate/45d73d85-b16b-4cbb-9a59-9caa7fc5cfc5
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/cors-allow-origin: "*"
     alb.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, PATCH, OPTIONS"
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: beatwave.bykunal.codes
+      http:
         paths:
           - path: /api
             pathType: Prefix
@@ -35,13 +38,16 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/group.name: beatwave
-    alb.ingress.kubernetes.io/group.order: "100"    
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/group.order: "100"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:966042699557:certificate/45d73d85-b16b-4cbb-9a59-9caa7fc5cfc5
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/healthcheck-path: /
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: beatwave.bykunal.codes
+      http:
         paths:
           - path: /
             pathType: Prefix
